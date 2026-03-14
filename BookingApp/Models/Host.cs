@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +20,5 @@ namespace BookingApp.Models
 
         public double Rating { get; set; }
         public int ReviewsCount { get; set; }
-
-        public List<Apartment>? Apartments { get; set; }
     }
 }

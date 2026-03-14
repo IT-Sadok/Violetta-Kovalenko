@@ -1,4 +1,4 @@
-﻿using BookingApp.Enums;
+using BookingApp.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,7 @@ namespace BookingApp.Models
     internal class Apartment
     {
         public int Id { get; set; }
+        public int HostId { get; set; }
 
         public required string Title { get; set; }
         public string? Description { get; set; }

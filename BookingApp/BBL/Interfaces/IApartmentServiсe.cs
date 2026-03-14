@@ -1,4 +1,4 @@
-﻿using BookingApp.Models;
+using BookingApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,10 @@ namespace BookingApp.BBL.Interfaces
     internal interface IApartmentServiсe
     {
         public List<Apartment> GetAllApartments();
-        public List<Apartment> GetAllApartmentByHostId(int id);
+        public List<Apartment> GetAllApartmentsByHostId(int id);
         public Apartment? GetApartmentById(int id);
+        public bool CreateApartment(Apartment apartment);
+        public bool UpdateApartment(Apartment apartment);
+        public bool DeleteApartment(int id);
     }
 }

@@ -1,4 +1,4 @@
-﻿using BookingApp.BBL.Interfaces;
+using BookingApp.BBL.Interfaces;
 using BookingApp.DAL.Interfaces;
 using BookingApp.Models;
 using System;
@@ -17,9 +17,10 @@ namespace BookingApp.BBL.Services
         {
             _apartmentRepository = apartmentRepository;
         }
-        public List<Apartment> GetAllApartmentByHostId(int id)
+
+        public List<Apartment> GetAllApartmentsByHostId(int id)
         {
-            return _apartmentRepository.GetAllApartmentByHostId(id);
+            return _apartmentRepository.GetAllApartmentsByHostId(id);
         }
 
         public List<Apartment> GetAllApartments()
@@ -29,12 +30,23 @@ namespace BookingApp.BBL.Services
 
         public Apartment? GetApartmentById(int id)
         {
-            if( id <= 0 )
-            {
-                return null;
-            }
-
             return _apartmentRepository.GetApartmentById(id);
         }
+
+                public bool CreateApartment(Apartment apartment)
+        {
+            return _apartmentRepository.CreateApartment(apartment);
+        }
+
+        public bool DeleteApartment(int id)
+        {
+            return _apartmentRepository.DeleteApartment(id);
+        }
+
+        public bool UpdateApartment(Apartment apartment)
+        {
+            return _apartmentRepository.UpdateApartment(apartment);
+        }
+
     }
 }
