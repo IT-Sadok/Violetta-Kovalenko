@@ -1,5 +1,5 @@
-﻿using BookingApp.DAL.Interfaces;
-using BookingApp.Models;
+﻿using BookingApp.DAL.Entities;
+using BookingApp.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

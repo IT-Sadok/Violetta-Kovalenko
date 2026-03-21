@@ -1,4 +1,4 @@
-﻿using BookingApp.Models;
+﻿using BookingApp.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,5 @@ namespace BookingApp.DAL.Interfaces
         public List<Apartment> GetAllApartments();
         public List<Apartment> GetAllApartmentByHostId(int id);
         public Apartment? GetApartmentById(int id);
-
     }
 }

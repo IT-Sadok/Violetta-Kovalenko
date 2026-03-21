@@ -1,12 +1,12 @@
-﻿using BookingApp.Enums;
-using BookingApp.Models;
+﻿using BookingApp.DAL.Entities;
+using BookingApp.DAL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Data
+namespace BookingApp.DAL.Data
 {
     internal static class DataSeederForBookingSystem
     {

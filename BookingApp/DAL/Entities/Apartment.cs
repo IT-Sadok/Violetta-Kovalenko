@@ -1,4 +1,4 @@
-﻿using BookingApp.Enums;
+﻿using BookingApp.DAL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Models
+namespace BookingApp.DAL.Entities
 {
     internal class Apartment
     {
@@ -32,7 +32,5 @@ namespace BookingApp.Models
         public bool IsAvailable { get; set; }
 
         public List<Facilities>? Facilities { get; set; }
-
-        
     }
 }

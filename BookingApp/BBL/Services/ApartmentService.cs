@@ -1,6 +1,6 @@
 ﻿using BookingApp.BBL.Interfaces;
+using BookingApp.DAL.Entities;
 using BookingApp.DAL.Interfaces;
-using BookingApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace BookingApp.BBL.Services
 
         public Apartment? GetApartmentById(int id)
         {
-            if( id <= 0 )
+            if(id <= 0)
             {
                 return null;
             }
