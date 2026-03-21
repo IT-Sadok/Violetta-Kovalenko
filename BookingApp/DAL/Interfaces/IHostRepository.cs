@@ -1,15 +1,13 @@
-﻿using BookingApp.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BookingApp.DAL.Entities;
 
 namespace BookingApp.DAL.Interfaces
 {
     internal interface IHostRepository
     {
-        public List<Host> GetAllHosts();
-        public Host? GetHostById(int id);
+        List<Host> GetAllHosts();
+        Host? GetHostById(int id);
+        List<Apartment> GetAllApartments();
+        List<Apartment> GetApartmentsByHostId(int hostId);
+        Apartment? GetApartmentById(int id);
     }
 }

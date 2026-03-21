@@ -1,4 +1,4 @@
-﻿using BookingApp.BBL.Services;
+using BookingApp.BBL.Services;
 using BookingApp.DAL.Repositories;
 using BookingApp.UI;
 using System;
@@ -10,10 +10,9 @@ namespace BookingApp
         static void Main(string[] args)
         {
             var hostRepository = new HostRepository();
-            var apartmentRepository = new ApartmentRepository(hostRepository);
 
             var hostService = new HostService(hostRepository);
-            var apartmentService = new ApartmentService(apartmentRepository);
+            var apartmentService = new ApartmentService(hostRepository);
 
             var ui = new ConsoleBooking(hostService, apartmentService);
 

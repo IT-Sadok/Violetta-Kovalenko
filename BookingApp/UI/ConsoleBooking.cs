@@ -1,4 +1,4 @@
-﻿using BookingApp.BBL.Interfaces;
+using BookingApp.BBL.Interfaces;
 using BookingApp.DAL.Entities;
 using System;
 using System.Collections.Generic;

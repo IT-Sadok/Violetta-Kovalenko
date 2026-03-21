@@ -1,40 +1,22 @@
-﻿using BookingApp.BBL.Interfaces;
+using BookingApp.BBL.Interfaces;
 using BookingApp.DAL.Entities;
 using BookingApp.DAL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookingApp.BBL.Services
 {
     internal class ApartmentService : IApartmentServiсe
     {
-        private readonly IApartmentRepository _apartmentRepository;
+        private readonly IHostRepository _hostRepository;
 
-        public ApartmentService(IApartmentRepository apartmentRepository)
+        public ApartmentService(IHostRepository hostRepository)
         {
-            _apartmentRepository = apartmentRepository;
-        }
-        public List<Apartment> GetAllApartmentByHostId(int id)
-        {
-            return _apartmentRepository.GetAllApartmentByHostId(id);
+            _hostRepository = hostRepository;
         }
 
-        public List<Apartment> GetAllApartments()
-        {
-            return _apartmentRepository.GetAllApartments();
-        }
+        public List<Apartment> GetAllApartments() => _hostRepository.GetAllApartments();
 
-        public Apartment? GetApartmentById(int id)
-        {
-            if(id <= 0)
-            {
-                return null;
-            }
+        public List<Apartment> GetAllApartmentByHostId(int id) => _hostRepository.GetApartmentsByHostId(id);
 
-            return _apartmentRepository.GetApartmentById(id);
-        }
+        public Apartment? GetApartmentById(int id) => id <= 0 ? null : _hostRepository.GetApartmentById(id);
     }
 }
