@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 using BookingApp.Models;
+=======
+using BookingApp.DAL.Entities;
+>>>>>>> feature/homework-1
 using System;
 using System.Collections.Generic;
 using System.Linq;

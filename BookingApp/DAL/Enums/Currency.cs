@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Enums
+namespace BookingApp.DAL.Enums
 {
     internal enum Currency
     {
         UAH,
-        dollar,
-        evro
+        USD,
+        EUR
     }
 }

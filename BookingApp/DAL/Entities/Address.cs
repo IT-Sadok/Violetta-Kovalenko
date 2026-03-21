@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Models
+namespace BookingApp.DAL.Entities
 {
     internal class Address
     {
