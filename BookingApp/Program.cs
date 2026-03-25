@@ -1,7 +1,8 @@
 using BookingApp.BBL.Services;
+using BookingApp.DAL.Data;
+using BookingApp.DAL.Interfaces;
 using BookingApp.DAL.Repositories;
 using BookingApp.UI;
-using System;
 
 namespace BookingApp
 {
@@ -9,12 +10,12 @@ namespace BookingApp
     {
         static void Main(string[] args)
         {
-            var hostRepository = new HostRepository();
+            IRepository repository = new InMemoryRepository();
+            repository.Initialize(BookingSystemSeeder.GetHosts());
 
-            var hostService = new HostService(hostRepository);
-            var apartmentService = new ApartmentService(hostRepository);
+            var hostService = new HostService(repository);
 
-            var ui = new ConsoleBooking(hostService, apartmentService);
+            var ui = new ConsoleBooking(hostService);
 
             ui.Start();
         }

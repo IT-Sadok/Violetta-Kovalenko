@@ -1,14 +1,9 @@
-﻿using BookingApp.DAL.Entities;
+using BookingApp.DAL.Entities;
 using BookingApp.DAL.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookingApp.DAL.Data
 {
-    internal static class DataSeederForBookingSystem
+    internal static class BookingSystemSeeder
     {
         public static List<Host> GetHosts()
         {
@@ -24,11 +19,12 @@ namespace BookingApp.DAL.Data
                     PhoneNumber = "+380501112233",
                     Rating = 4.9,
                     ReviewsCount = 134,
-                    Apartments = new List<Apartment>
-                    {
+                    Apartments =
+                    [
                         new Apartment
                         {
                             Id = 1,
+                            HostId = 1,
                             Title = "Апартаменти в центрі Києва",
                             Description = "Сучасна квартира біля Майдану Незалежності.",
                             Type = ApartmentType.Apartment,
@@ -50,19 +46,34 @@ namespace BookingApp.DAL.Data
                             Rating = 9.4,
                             ReviewsCount = 87,
                             IsAvailable = true,
-                            Facilities = new List<Facilities>
-                            {
+                            Facilities =
+                            [
                                 Facilities.WiFi,
                                 Facilities.AirConditioning,
                                 Facilities.Kitchen,
                                 Facilities.WashingMachine,
                                 Facilities.Parking,
                                 Facilities.Balcony
-                            }
-                        },
+                            ]
+                        }
+                    ]
+                },
+                new Host
+                {
+                    Id = 2,
+                    FirstName = "Марія",
+                    LastName = "Іваненко",
+                    DisplayName = "Марія",
+                    Email = "maria@example.com",
+                    PhoneNumber = "+380671234567",
+                    Rating = 4.8,
+                    ReviewsCount = 98,
+                    Apartments =
+                    [
                         new Apartment
                         {
                             Id = 2,
+                            HostId = 2,
                             Title = "Студія з видом на Дніпро",
                             Description = "Затишна студія з панорамними вікнами.",
                             Type = ApartmentType.Studio,
@@ -84,32 +95,32 @@ namespace BookingApp.DAL.Data
                             Rating = 9.1,
                             ReviewsCount = 45,
                             IsAvailable = true,
-                            Facilities = new List<Facilities>
-                            {
+                            Facilities =
+                            [
                                 Facilities.WiFi,
                                 Facilities.SeaView,
                                 Facilities.SmartTV,
                                 Facilities.Elevator
-                            }
+                            ]
                         }
-                    }
+                    ]
                 },
-
                 new Host
                 {
-                    Id = 2,
-                    FirstName = "Марія",
-                    LastName = "Іваненко",
-                    DisplayName = "Марія",
-                    Email = "maria@example.com",
-                    PhoneNumber = "+380671234567",
-                    Rating = 4.8,
-                    ReviewsCount = 98,
-                    Apartments = new List<Apartment>
-                    {
+                    Id = 3,
+                    FirstName = "Ігор",
+                    LastName = "Петренко",
+                    DisplayName = "Ігор",
+                    Email = "ihor@example.com",
+                    PhoneNumber = "+380931112244",
+                    Rating = 4.7,
+                    ReviewsCount = 76,
+                    Apartments =
+                    [
                         new Apartment
                         {
                             Id = 3,
+                            HostId = 3,
                             Title = "Львівська квартира біля Оперного",
                             Description = "Історичний центр міста.",
                             Type = ApartmentType.Apartment,
@@ -131,32 +142,18 @@ namespace BookingApp.DAL.Data
                             Rating = 9.6,
                             ReviewsCount = 102,
                             IsAvailable = true,
-                            Facilities = new List<Facilities>
-                            {
+                            Facilities =
+                            [
                                 Facilities.WiFi,
                                 Facilities.Heating,
                                 Facilities.Kitchen,
                                 Facilities.PetFriendly
-                            }
-                        }
-                    }
-                },
-
-                new Host
-                {
-                    Id = 3,
-                    FirstName = "Ігор",
-                    LastName = "Петренко",
-                    DisplayName = "Ігор",
-                    Email = "ihor@example.com",
-                    PhoneNumber = "+380931112244",
-                    Rating = 4.7,
-                    ReviewsCount = 76,
-                    Apartments = new List<Apartment>
-                    {
+                            ]
+                        },
                         new Apartment
                         {
                             Id = 4,
+                            HostId = 3,
                             Title = "Вілла біля моря",
                             Description = "Простора вілла з приватним басейном.",
                             Type = ApartmentType.Villa,
@@ -178,8 +175,8 @@ namespace BookingApp.DAL.Data
                             Rating = 9.8,
                             ReviewsCount = 54,
                             IsAvailable = true,
-                            Facilities = new List<Facilities>
-                            {
+                            Facilities =
+                            [
                                 Facilities.WiFi,
                                 Facilities.PrivatePool,
                                 Facilities.SeaView,
@@ -187,9 +184,9 @@ namespace BookingApp.DAL.Data
                                 Facilities.Garden,
                                 Facilities.Parking,
                                 Facilities.AirConditioning
-                            }
+                            ]
                         }
-                    }
+                    ]
                 }
             };
         }

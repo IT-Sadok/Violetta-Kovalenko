@@ -1,35 +1,38 @@
 using BookingApp.BBL.Interfaces;
 using BookingApp.DAL.Interfaces;
 using BookingApp.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookingApp.BBL.Services
 {
     internal class HostService : IHostService
     {
-        private readonly IHostRepository _hostRepository;
+        private readonly IRepository _repository;
 
-        public HostService(IHostRepository hostRepository)
+        public HostService(IRepository repository)
         {
-            _hostRepository = hostRepository;
-        }
-        public List<Host> GetAllHosts()
-        {
-            return _hostRepository.GetAllHosts();
+            _repository = repository;
         }
 
-        public Host? GetHostById(int id)
-        {
-            if(id <= 0)
-            {
-                return null;
-            }
+        public bool CreateHost(Host host) => _repository.AddHost(host);
 
-            return _hostRepository.GetHostById(id);
-        }
+        public bool DeleteHost(int id) => _repository.RemoveHost(id);
+
+        public List<Host> GetAllHosts() => _repository.GetAllHosts();
+
+        public Host? GetHostById(int id) => _repository.GetHostById(id);
+
+        public bool UpdateHost(Host host) => _repository.ReplaceHost(host);
+
+        public List<Apartment> GetAllApartments() => _repository.GetAllApartments();
+
+        public Apartment? GetApartmentById(int id) => _repository.GetApartmentById(id);
+
+        public List<Apartment> GetApartmentsByHostId(int hostId) => _repository.GetApartmentsByHostId(hostId);
+
+        public bool CreateApartment(int hostId, Apartment apartment) => _repository.AddApartment(hostId, apartment);
+
+        public bool UpdateApartment(int hostId, Apartment apartment) => _repository.ReplaceApartment(hostId, apartment);
+
+        public bool DeleteApartment(int hostId, Apartment apartment) => _repository.RemoveApartment(hostId, apartment);
     }
 }

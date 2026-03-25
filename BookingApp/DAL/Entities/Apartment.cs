@@ -1,17 +1,11 @@
-﻿using BookingApp.DAL.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using BookingApp.DAL.Enums;
 
 namespace BookingApp.DAL.Entities
 {
     internal class Apartment
     {
         public int Id { get; set; }
-
+        public int HostId { get; set; }
         public required string Title { get; set; }
         public string? Description { get; set; }
         public ApartmentType Type { get; set; }
