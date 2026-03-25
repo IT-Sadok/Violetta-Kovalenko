@@ -1,19 +1,18 @@
-using BookingApp.Models;
+using BookingApp.DAL.Entities;
 
 namespace BookingApp.DAL.Interfaces
 {
     internal interface IInMemoryStorage
     {
-        IReadOnlyList<Host> Hosts { get; }
-        IReadOnlyList<Apartment> Apartments { get; }
+        public IReadOnlyList<Host> Hosts { get; }
 
-        bool AddHost(Host host);
-        bool RemoveHost(int hostId);
-        bool ReplaceHost(Host host);
-        bool AddApartment(Apartment apartment);
-        bool RemoveApartment(int apartmentId);
-        bool ReplaceApartment(Apartment apartment);
+        public bool AddHost(Host host);
+        public bool RemoveHost(int hostId);
+        public bool ReplaceHost(Host host);
+        public bool AddApartment(int idHost, Apartment apartment);
+        public bool RemoveApartment(int idHost, Apartment apartment);
+        public bool ReplaceApartment(int idHost, Apartment apartment);
 
-        void Initialize(IEnumerable<Host> hosts, IEnumerable<Apartment> apartments);
+        public void Initialize(IEnumerable<Host> hosts);
     }
 }

@@ -1,5 +1,6 @@
+using BookingApp.DAL.Entities;
 using BookingApp.DAL.Interfaces;
-using BookingApp.Models;
+using BookingApp.DAL.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,10 +9,7 @@ namespace BookingApp.DAL.Storage
     internal sealed class InMemoryStorage : IInMemoryStorage
     {
         private readonly List<Host> _hosts = new();
-        private readonly List<Apartment> _apartments = new();
-
         public IReadOnlyList<Host> Hosts => _hosts;
-        public IReadOnlyList<Apartment> Apartments => _apartments;
 
         public bool AddHost(Host host)
         {
@@ -20,19 +18,6 @@ namespace BookingApp.DAL.Storage
                 throw new ArgumentNullException(nameof(host));
             }
             _hosts.Add(host);
-            return true;
-        }
-
-        public bool RemoveHost(int hostId)
-        {
-            var host = _hosts.FirstOrDefault(h => h.Id == hostId);
-            if (host == null)
-            {
-                return false;
-            }
-
-            _apartments.RemoveAll(a => a.HostId == hostId);
-            _hosts.Remove(host);
             return true;
         }
 
@@ -51,59 +36,90 @@ namespace BookingApp.DAL.Storage
             return true;
         }
 
-        public bool AddApartment(Apartment apartment)
+        public bool RemoveHost(int hostId)
         {
-            if (apartment == null)
+            if(hostId < 0)
             {
-                throw new ArgumentNullException(nameof(apartment));
+                throw new ArgumentNullException(nameof(hostId));
             }
-            _apartments.Add(apartment);
-            return true;
-        }
 
-        public bool RemoveApartment(int apartmentId)
-        {
-            var apartment = _apartments.FirstOrDefault(a => a.Id == apartmentId);
-            if (apartment == null)
+            Host? currentHost = _hosts.FirstOrDefault(h => h.Id == hostId);
+            if (currentHost == null)
             {
                 return false;
             }
 
-            _apartments.Remove(apartment);
-            return true;
+            return _hosts.Remove(currentHost);
         }
 
-        public bool ReplaceApartment(Apartment apartment)
-        {
-            if (apartment == null)
-            {
-                throw new ArgumentNullException(nameof(apartment));
-            }
-
-            var index = _apartments.FindIndex(a => a.Id == apartment.Id);
-            if (index < 0)
-                return false;
-
-            _apartments[index] = apartment;
-            return true;
-        }
-
-        public void Initialize(IEnumerable<Host> hosts, IEnumerable<Apartment> apartments)
+        public void Initialize(IEnumerable<Host> hosts)
         {
             if (hosts == null)
             {
                 throw new ArgumentNullException(nameof(hosts));
             }
-            if (apartments == null)
-            {
-                throw new ArgumentNullException(nameof(apartments));
-            }
 
             _hosts.Clear();
-            _apartments.Clear();
-
             _hosts.AddRange(hosts);
-            _apartments.AddRange(apartments);
+        }
+
+        public bool AddApartment(int idHost, Apartment apartment)
+        {
+            if(idHost < 0 && apartment == null) 
+            {  
+                throw new ArgumentNullException(nameof(apartment));
+            }
+
+            Host? currentHost = _hosts.FirstOrDefault(a => a.Id == idHost);
+
+            if(currentHost == null)
+            {
+                return false;
+            }
+
+            currentHost.Apartments?.Add(apartment);
+
+            return true;
+        }
+
+        public bool RemoveApartment(int idHost, Apartment apartment)
+        {
+            if(idHost < 0 &&  apartment == null)
+            {
+                throw new ArgumentNullException(nameof(apartment));
+
+            }
+
+            Host? currentHost = _hosts.FirstOrDefault(h => h.Id == idHost);
+
+            if (currentHost == null)
+            {
+                return false;
+            }
+
+            currentHost.Apartments?.Remove(apartment);
+
+            return true;
+        }
+
+        public bool ReplaceApartment(int idHost, Apartment apartment)
+        {
+            if (idHost < 0 && apartment == null)
+            {
+                throw new ArgumentNullException(nameof(apartment));
+
+            }
+
+            Host? currentHost = _hosts.FirstOrDefault(h => h.Id == idHost);
+
+            if (currentHost == null)
+            {
+                return false;
+            }
+
+            currentHost.Apartments[apartment.Id] = apartment;
+
+            return true;
         }
     }
 }

@@ -10,45 +10,41 @@ namespace BookingApp.BBL.Services
 
         public ApartmentService(IHostRepository hostRepository)
         {
-<<<<<<< HEAD
-            _apartmentRepository = apartmentRepository;
+
+            _hostRepository = hostRepository;
         }
 
         public List<Apartment> GetAllApartmentsByHostId(int id)
         {
-            return _apartmentRepository.GetAllApartmentsByHostId(id);
-=======
-            _hostRepository = hostRepository;
->>>>>>> feature/homework-1
+            return _hostRepository.GetApartmentsByHostId(id);
         }
 
         public List<Apartment> GetAllApartments() => _hostRepository.GetAllApartments();
-
-<<<<<<< HEAD
         public Apartment? GetApartmentById(int id)
         {
-            return _apartmentRepository.GetApartmentById(id);
+            return _hostRepository.GetApartmentById(id);
         }
 
-                public bool CreateApartment(Apartment apartment)
+        public bool CreateApartment(Apartment apartment)
         {
-            return _apartmentRepository.CreateApartment(apartment);
+            return _hostRepository.CreateApartment(apartment);
         }
 
         public bool DeleteApartment(int id)
         {
-            return _apartmentRepository.DeleteApartment(id);
+            return _hostRepository.DeleteApartment(id);
         }
 
         public bool UpdateApartment(Apartment apartment)
         {
-            return _apartmentRepository.UpdateApartment(apartment);
+            return _hostRepository.UpdateApartment(apartment);
         }
 
-=======
-        public List<Apartment> GetAllApartmentByHostId(int id) => _hostRepository.GetApartmentsByHostId(id);
+        public List<Apartment> GetAllApartmentByHostId(int id)
+        {
+            return _hostRepository.GetApartmentsByHostId(id);
+        }
 
-        public Apartment? GetApartmentById(int id) => id <= 0 ? null : _hostRepository.GetApartmentById(id);
->>>>>>> feature/homework-1
+
     }
 }

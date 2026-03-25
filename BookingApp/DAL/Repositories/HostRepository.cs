@@ -1,19 +1,11 @@
-<<<<<<< HEAD
 using BookingApp.DAL.Interfaces;
-using BookingApp.Models;
-=======
-using BookingApp.DAL.Data;
 using BookingApp.DAL.Entities;
-using BookingApp.DAL.Interfaces;
->>>>>>> feature/homework-1
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BookingApp.DAL.Repositories
 {
     internal class HostRepository : IHostRepository
     {
-<<<<<<< HEAD
+
         private readonly IInMemoryStorage _storage;
 
         public HostRepository(IInMemoryStorage storage)
@@ -78,26 +70,37 @@ namespace BookingApp.DAL.Repositories
             }
             return _storage.RemoveHost(id);
         }
-=======
-        private readonly List<Host> _hosts;
 
-        public HostRepository()
+        public List<Apartment> GetAllApartments() 
         {
-            _hosts = DataSeederForBookingSystem.GetHosts();
+            return _storage.Hosts.SelectMany(h => h.Apartments ?? new List<Apartment>())
+                         .ToList();
         }
 
-        public List<Host> GetAllHosts() => _hosts;
+        public List<Apartment> GetApartmentsByHostId(int hostId)
+        {
+            return GetHostById(hostId)?.Apartments?.ToList() ?? new List<Apartment>();
+        }
 
-        public Host? GetHostById(int id) => _hosts.FirstOrDefault(h => h.Id == id);
+        public Apartment? GetApartmentById(int id)
+        {
+            return _storage.Hosts.SelectMany(h => h.Apartments ?? new List<Apartment>())
+                         .FirstOrDefault(a => a.Id == id);
+        }
 
-        public List<Apartment> GetAllApartments() =>
-            _hosts.SelectMany(h => h.Apartments ?? new List<Apartment>()).ToList();
+        public bool CreateApartment(Apartment a)
+        {
+            throw new NotImplementedException();
+        }
 
-        public List<Apartment> GetApartmentsByHostId(int hostId) =>
-            GetHostById(hostId)?.Apartments?.ToList() ?? new List<Apartment>();
+        public bool UpdateApartment(Apartment a)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Apartment? GetApartmentById(int id) =>
-            _hosts.SelectMany(h => h.Apartments ?? new List<Apartment>()).FirstOrDefault(a => a.Id == id);
->>>>>>> feature/homework-1
+        public bool DeleteApartment(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,13 +1,6 @@
 using BookingApp.BBL.Interfaces;
-<<<<<<< HEAD
-using BookingApp.Enums;
-using BookingApp.Models;
-=======
 using BookingApp.DAL.Entities;
-using System;
-using System.Collections.Generic;
->>>>>>> feature/homework-1
-using System.Linq;
+using BookingApp.DAL.Enums;
 using System.Text;
 
 namespace BookingApp.UI
