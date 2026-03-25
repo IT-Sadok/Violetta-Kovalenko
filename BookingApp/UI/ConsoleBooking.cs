@@ -1,6 +1,8 @@
 using BookingApp.BBL.Interfaces;
 using BookingApp.DAL.Entities;
 using BookingApp.DAL.Enums;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace BookingApp.UI
@@ -8,12 +10,10 @@ namespace BookingApp.UI
     internal class ConsoleBooking
     {
         private readonly IHostService _hostService;
-        private readonly IApartmentServiсe _apartmentService;
 
-        public ConsoleBooking(IHostService hostService, IApartmentServiсe apartmentService)
+        public ConsoleBooking(IHostService hostService)
         {
             _hostService = hostService;
-            _apartmentService = apartmentService;
         }
 
         public void Start()
@@ -218,7 +218,7 @@ namespace BookingApp.UI
         private void ShowAllApartments()
         {
             Console.Clear();
-            var list = _apartmentService.GetAllApartments();
+            var list = _hostService.GetAllApartments();
 
             if (list.Count == 0) { Pause("Апартаменти відсутні."); return; }
 
@@ -228,18 +228,21 @@ namespace BookingApp.UI
 
             Console.Write("\nID для деталей (Enter - назад): ");
             if (int.TryParse(Console.ReadLine(), out int id))
-                ShowApartmentDetails(id);
+            {
+                ShowApartmentDetails(list.FirstOrDefault(a => a.Id == id));
+            }
         }
 
         private void ViewApartment()
         {
             Console.Clear();
-            var list = _apartmentService.GetAllApartments();
+            var list = _hostService.GetAllApartments();
             if (list.Count == 0) { Pause("Апартаменти відсутні."); return; }
 
             foreach (var a in list) Console.WriteLine($"{a.Id}. {a.Title}");
             int id = ParseInt(Input("\nID апартаменту")) ?? 0;
-            ShowApartmentDetails(id);
+            var apt = list.FirstOrDefault(a => a.Id == id);
+            ShowApartmentDetails(apt);
         }
 
         private void ShowApartmentsByHost()
@@ -256,7 +259,7 @@ namespace BookingApp.UI
         private void ShowHostApartments(int hostId)
         {
             Console.Clear();
-            var list = _apartmentService.GetAllApartmentsByHostId(hostId);
+            var list = _hostService.GetApartmentsByHostId(hostId);
 
             if (list.Count == 0) { Pause("Немає апартаментів."); return; }
 
@@ -266,13 +269,15 @@ namespace BookingApp.UI
 
             Console.Write("\nID для деталей (Enter - назад): ");
             if (int.TryParse(Console.ReadLine(), out int id))
-                ShowApartmentDetails(id);
+            {
+                var apt = list.FirstOrDefault(a => a.Id == id);
+                ShowApartmentDetails(apt);
+            }
         }
 
-        private void ShowApartmentDetails(int id)
+        private static void ShowApartmentDetails(Apartment? apt)
         {
             Console.Clear();
-            var apt = _apartmentService.GetApartmentById(id);
 
             if (apt == null) { Pause("Не знайдено."); return; }
 
@@ -324,7 +329,7 @@ namespace BookingApp.UI
                 IsAvailable = true
             };
 
-            if (_apartmentService.CreateApartment(apt))
+            if (_hostService.CreateApartment(hostId, apt))
                 Pause("Додано!");
             else
                 Pause("Помилка (перевірте ID хоста).");
@@ -333,12 +338,12 @@ namespace BookingApp.UI
         private void UpdateApartment()
         {
             Console.Clear();
-            var list = _apartmentService.GetAllApartments();
+            var list = _hostService.GetAllApartments();
             if (list.Count == 0) { Pause("Апартаменти відсутні."); return; }
 
             foreach (var a in list) Console.WriteLine($"{a.Id}. {a.Title}");
             int id = ParseInt(Input("\nID апартаменту")) ?? 0;
-            var apt = _apartmentService.GetApartmentById(id);
+            var apt = list.FirstOrDefault(a => a.Id == id);
 
             if (apt == null) { Pause("Не знайдено."); return; }
 
@@ -348,7 +353,7 @@ namespace BookingApp.UI
             apt.PricePerNight = ParseDecimal(Input("Ціна", apt.PricePerNight.ToString())) ?? apt.PricePerNight;
             apt.IsAvailable = Input("Доступний (так/ні)", apt.IsAvailable ? "так" : "ні").ToLower() == "так";
 
-            if (_apartmentService.UpdateApartment(apt))
+            if (_hostService.UpdateApartment(apt.HostId, apt))
                 Pause("Оновлено!");
             else
                 Pause("Помилка.");
@@ -357,14 +362,16 @@ namespace BookingApp.UI
         private void DeleteApartment()
         {
             Console.Clear();
-            var list = _apartmentService.GetAllApartments();
+            var list = _hostService.GetAllApartments();
             if (list.Count == 0) { Pause("Апартаменти відсутні."); return; }
 
             foreach (var a in list) Console.WriteLine($"{a.Id}. {a.Title}");
             int id = ParseInt(Input("\nID для видалення")) ?? 0;
+            var apt = list.FirstOrDefault(a => a.Id == id);
+            if (apt == null) { Pause("Не знайдено."); return; }
 
             Console.Write("Підтвердити (так/ні): ");
-            if (Console.ReadLine()?.ToLower() == "так" && _apartmentService.DeleteApartment(id))
+            if (Console.ReadLine()?.ToLower() == "так" && _hostService.DeleteApartment(apt.HostId, apt))
                 Pause("Видалено!");
             else
                 Pause("Скасовано або помилка.");
@@ -384,12 +391,12 @@ namespace BookingApp.UI
 
         private static double? ParseDouble(string s)
         {
-            return double.TryParse(s?.Trim().Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double v) ? v : null;
+            return double.TryParse(s?.Trim().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double v) ? v : null;
         }
 
         private static decimal? ParseDecimal(string s)
         {
-            return decimal.TryParse(s?.Trim().Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal v) ? v : null;
+            return decimal.TryParse(s?.Trim().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal v) ? v : null;
         }
 
         private static void Pause(string? msg = null)

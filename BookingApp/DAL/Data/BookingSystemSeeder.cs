@@ -1,7 +1,7 @@
 using BookingApp.DAL.Entities;
 using BookingApp.DAL.Enums;
 
-namespace BookingApp.Data.Seeders
+namespace BookingApp.DAL.Data
 {
     internal static class BookingSystemSeeder
     {
@@ -19,8 +19,8 @@ namespace BookingApp.Data.Seeders
                     PhoneNumber = "+380501112233",
                     Rating = 4.9,
                     ReviewsCount = 134,
-                    Apartments = new List<Apartment>() { 
-
+                    Apartments =
+                    [
                         new Apartment
                         {
                             Id = 1,
@@ -46,17 +46,17 @@ namespace BookingApp.Data.Seeders
                             Rating = 9.4,
                             ReviewsCount = 87,
                             IsAvailable = true,
-                            Facilities = new List<Facilities>
-                            {
+                            Facilities =
+                            [
                                 Facilities.WiFi,
                                 Facilities.AirConditioning,
                                 Facilities.Kitchen,
                                 Facilities.WashingMachine,
                                 Facilities.Parking,
                                 Facilities.Balcony
-                            }
-                            }
-                        },
+                            ]
+                        }
+                    ]
                 },
                 new Host
                 {
@@ -68,9 +68,8 @@ namespace BookingApp.Data.Seeders
                     PhoneNumber = "+380671234567",
                     Rating = 4.8,
                     ReviewsCount = 98,
-                    Apartments = new List<Apartment>
-                    {
-
+                    Apartments =
+                    [
                         new Apartment
                         {
                             Id = 2,
@@ -96,15 +95,15 @@ namespace BookingApp.Data.Seeders
                             Rating = 9.1,
                             ReviewsCount = 45,
                             IsAvailable = true,
-                            Facilities = new List<Facilities>
-                            {
+                            Facilities =
+                            [
                                 Facilities.WiFi,
                                 Facilities.SeaView,
                                 Facilities.SmartTV,
                                 Facilities.Elevator
-                            }
-                            }
+                            ]
                         }
+                    ]
                 },
                 new Host
                 {
@@ -116,79 +115,78 @@ namespace BookingApp.Data.Seeders
                     PhoneNumber = "+380931112244",
                     Rating = 4.7,
                     ReviewsCount = 76,
-                    Apartments = new List<Apartment>()
-                    {
-                       new Apartment
-                            {
-                                Id = 3,
-                                HostId = 3,
-                                Title = "Львівська квартира біля Оперного",
-                                Description = "Історичний центр міста.",
-                                Type = ApartmentType.Apartment,
-                                Address = new Address
-                                {
-                                    Country = "Україна",
-                                    City = "Львів",
-                                    Street = "проспект Свободи",
-                                    BuildingNumber = "12",
-                                    PostalCode = "79000"
-                                },
-                                MaxGuests = 3,
-                                Bedrooms = 1,
-                                Beds = 2,
-                                Bathrooms = 1,
-                                Area = 55,
-                                PricePerNight = 1600,
-                                Currency = Currency.UAH,
-                                Rating = 9.6,
-                                ReviewsCount = 102,
-                                IsAvailable = true,
-                                Facilities = new List<Facilities>
-                                {
-                                    Facilities.WiFi,
-                                    Facilities.Heating,
-                                    Facilities.Kitchen,
-                                    Facilities.PetFriendly
-                                }
-                            },
-
+                    Apartments =
+                    [
                         new Apartment
+                        {
+                            Id = 3,
+                            HostId = 3,
+                            Title = "Львівська квартира біля Оперного",
+                            Description = "Історичний центр міста.",
+                            Type = ApartmentType.Apartment,
+                            Address = new Address
                             {
-                                Id = 4,
-                                HostId = 3,
-                                Title = "Вілла біля моря",
-                                Description = "Простора вілла з приватним басейном.",
-                                Type = ApartmentType.Villa,
-                                Address = new Address
-                                {
-                                    Country = "Україна",
-                                    City = "Одеса",
-                                    Street = "Фонтанська дорога",
-                                    BuildingNumber = "55",
-                                    PostalCode = "65000"
-                                },
-                                MaxGuests = 8,
-                                Bedrooms = 4,
-                                Beds = 5,
-                                Bathrooms = 3,
-                                Area = 200,
-                                PricePerNight = 7500,
-                                Currency = Currency.UAH,
-                                Rating = 9.8,
-                                ReviewsCount = 54,
-                                IsAvailable = true,
-                                Facilities = new List<Facilities>
-                                {
-                                    Facilities.WiFi,
-                                    Facilities.PrivatePool,
-                                    Facilities.SeaView,
-                                    Facilities.BBQArea,
-                                    Facilities.Garden,
-                                    Facilities.Parking,
-                                    Facilities.AirConditioning
-                                }
-                            }
-                    }
+                                Country = "Україна",
+                                City = "Львів",
+                                Street = "проспект Свободи",
+                                BuildingNumber = "12",
+                                PostalCode = "79000"
+                            },
+                            MaxGuests = 3,
+                            Bedrooms = 1,
+                            Beds = 2,
+                            Bathrooms = 1,
+                            Area = 55,
+                            PricePerNight = 1600,
+                            Currency = Currency.UAH,
+                            Rating = 9.6,
+                            ReviewsCount = 102,
+                            IsAvailable = true,
+                            Facilities =
+                            [
+                                Facilities.WiFi,
+                                Facilities.Heating,
+                                Facilities.Kitchen,
+                                Facilities.PetFriendly
+                            ]
+                        },
+                        new Apartment
+                        {
+                            Id = 4,
+                            HostId = 3,
+                            Title = "Вілла біля моря",
+                            Description = "Простора вілла з приватним басейном.",
+                            Type = ApartmentType.Villa,
+                            Address = new Address
+                            {
+                                Country = "Україна",
+                                City = "Одеса",
+                                Street = "Фонтанська дорога",
+                                BuildingNumber = "55",
+                                PostalCode = "65000"
+                            },
+                            MaxGuests = 8,
+                            Bedrooms = 4,
+                            Beds = 5,
+                            Bathrooms = 3,
+                            Area = 200,
+                            PricePerNight = 7500,
+                            Currency = Currency.UAH,
+                            Rating = 9.8,
+                            ReviewsCount = 54,
+                            IsAvailable = true,
+                            Facilities =
+                            [
+                                Facilities.WiFi,
+                                Facilities.PrivatePool,
+                                Facilities.SeaView,
+                                Facilities.BBQArea,
+                                Facilities.Garden,
+                                Facilities.Parking,
+                                Facilities.AirConditioning
+                            ]
+                        }
+                    ]
                 }
             };
         }

@@ -1,4 +1,4 @@
-﻿using BookingApp.DAL.Entities;
+using BookingApp.DAL.Entities;
 
 namespace BookingApp.BBL.Interfaces
 {
@@ -9,5 +9,12 @@ namespace BookingApp.BBL.Interfaces
         public bool CreateHost(Host host);
         public bool UpdateHost(Host host);
         public bool DeleteHost(int id);
+
+        public List<Apartment> GetAllApartments();
+        public Apartment? GetApartmentById(int id);
+        public List<Apartment> GetApartmentsByHostId(int hostId);
+        public bool CreateApartment(int hostId, Apartment apartment);
+        public bool UpdateApartment(int hostId, Apartment apartment);
+        public bool DeleteApartment(int hostId, Apartment apartment);
     }
-}   
+}
