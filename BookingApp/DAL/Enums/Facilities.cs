@@ -1,0 +1,36 @@
+﻿namespace BookingApp.DAL.Enums
+{
+    internal enum Facilities
+    {
+        WiFi,
+        AirConditioning,
+        Heating,
+        Kitchen,
+        WashingMachine,
+        Dishwasher,
+        Parking,
+        FreeParking,
+        Pool,
+        PrivatePool,
+        Gym,
+        Spa,
+        Balcony,
+        Terrace,
+        SeaView,
+        MountainView,
+        TV,
+        SmartTV,
+        Workspace,
+        Elevator,
+        PetFriendly,
+        SmokingAllowed,
+        BreakfastIncluded,
+        Reception,
+        Security,
+        Fireplace,
+        Jacuzzi,
+        Sauna,
+        Garden,
+        BBQArea
+    }
+}
