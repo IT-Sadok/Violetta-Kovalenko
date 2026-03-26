@@ -27,6 +27,7 @@ namespace BookingApp.UI
                 Console.WriteLine("=== СИСТЕМА БРОНЮВАННЯ ===");
                 Console.WriteLine("1. Хости");
                 Console.WriteLine("2. Апартаменти");
+                Console.WriteLine("3. Зберегти зміни");
                 Console.WriteLine("0. Вийти");
                 Console.Write("\nОберіть: ");
 
@@ -34,9 +35,23 @@ namespace BookingApp.UI
                 {
                     case "1": MenuHosts(); break;
                     case "2": MenuApartments(); break;
+                    case "3": SaveChangesToFile(); break;
                     case "0": return;
                     default: Pause("Невірний вибір"); break;
                 }
+            }
+        }
+
+        private void SaveChangesToFile()
+        {
+            try
+            {
+                _hostService.SaveChanges();
+                Pause("Зміни збережено у файл.");
+            }
+            catch (Exception ex)
+            {
+                Pause($"Не вдалося зберегти: {ex.Message}");
             }
         }
 
