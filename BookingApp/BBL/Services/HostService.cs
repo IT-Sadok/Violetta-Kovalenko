@@ -1,16 +1,18 @@
 using BookingApp.BBL.Interfaces;
-using BookingApp.DAL.Interfaces;
 using BookingApp.DAL.Entities;
+using BookingApp.DAL.Interfaces;
 
 namespace BookingApp.BBL.Services
 {
-    internal class HostService : IHostService
+    internal sealed class HostService : IHostService
     {
         private readonly IRepository _repository;
+        private readonly IBookingJsonPersistence _persistence;
 
-        public HostService(IRepository repository)
+        public HostService(IRepository repository, IBookingJsonPersistence persistence)
         {
             _repository = repository;
+            _persistence = persistence;
         }
 
         public bool CreateHost(Host host) => _repository.AddHost(host);
@@ -34,5 +36,7 @@ namespace BookingApp.BBL.Services
         public bool UpdateApartment(int hostId, Apartment apartment) => _repository.ReplaceApartment(hostId, apartment);
 
         public bool DeleteApartment(int hostId, Apartment apartment) => _repository.RemoveApartment(hostId, apartment);
+
+        public void SaveChanges() => _persistence.Save(_repository.GetAllHosts());
     }
 }

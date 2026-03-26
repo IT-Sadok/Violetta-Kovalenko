@@ -16,5 +16,7 @@ namespace BookingApp.BBL.Interfaces
         public bool CreateApartment(int hostId, Apartment apartment);
         public bool UpdateApartment(int hostId, Apartment apartment);
         public bool DeleteApartment(int hostId, Apartment apartment);
+
+        void SaveChanges();
     }
 }
